@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-    <li class="flex items-center justify-between border h-14 px-5 cursor-pointer">
+    <li class="flex items-center justify-between border h-14 px-5 cursor-pointer rounded">
         <span>
             {{ employee.firstName }}
         </span>
