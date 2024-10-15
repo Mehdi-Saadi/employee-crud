@@ -14,3 +14,5 @@ export interface Family {
     dateOfBirth: DateOfBirth;
     relation: 'spouse' | 'daughter' | 'son';
 }
+
+export type EmployeeBrief = Pick<Employee, 'id' | 'firstName' | 'lastName'>;
