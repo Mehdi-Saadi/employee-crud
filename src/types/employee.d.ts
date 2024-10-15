@@ -1,16 +1,16 @@
 type DateOfBirth = string; // date-time
 
 export interface Employee {
-    id: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    dateOfBirth: DateOfBirth,
-    family: Family[],
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    dateOfBirth: DateOfBirth;
+    family: Family[];
 }
 
 export interface Family {
-    name: string,
-    dateOfBirth: DateOfBirth,
-    relation: 'spouse' | 'daughter' | 'son',
+    name: string;
+    dateOfBirth: DateOfBirth;
+    relation: 'spouse' | 'daughter' | 'son';
 }
