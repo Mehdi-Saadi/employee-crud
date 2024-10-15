@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import EmployeeFormField from './EmployeeFormField.vue';
+import SuccessButton from '@/components/buttons/SuccessButton.vue';
+import EmployeeFormField from '@/components/employee/EmployeeFormField.vue';
 import { ref } from 'vue';
 
 const showFrom = ref<boolean>(false);
@@ -7,45 +8,47 @@ const showFrom = ref<boolean>(false);
 
 <template>
     <!-- form -->
-    <div 
+    <div
         v-if="showFrom"
         class="relative mt-5"
     >
         <div class="flex flex-col space-y-5 p-5 border rounded">
             <!-- employee data -->
             <div class="grid grid-cols-2 gap-5">
-                <EmployeeFormField 
+                <EmployeeFormField
                     :autofocus="true"
                     id="name"
                     label="نام"
                     type="text"
                 />
-                <EmployeeFormField 
+                <EmployeeFormField
                     label="نام خانوادگی"
                     id="last-name"
                     type="text"
                 />
-                <EmployeeFormField 
+                <EmployeeFormField
                     label="تاریخ تولد"
                     id="date-of-birth"
                     type="date"
                 />
-                <EmployeeFormField 
+                <EmployeeFormField
                     label="ایمیل"
                     id="email"
                     type="email"
                 />
             </div>
+            <!-- buttons -->
+            <div class="flex items-center justify-between">
+                <SuccessButton title="افزودن" />
+            </div>
         </div>
     </div>
 
     <!-- trigger -->
-    <button
+    <SuccessButton
         v-else
         @click="showFrom = true"
-        class="text-white bg-green-700 rounded max-w-max px-5 py-2 mx-auto mt-5 hover:bg-green-800 transition duration-200" 
-        type="button"
-    >
-        افزودن کارمند جدید
-    </button>
+        class="mx-auto mt-5"
+        title="افزودن کارمند جدید"
+    />
 </template>
