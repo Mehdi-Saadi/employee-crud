@@ -19,7 +19,7 @@ const defaultEmployeeValue: EmployeeToAdd = {
 
 <template>
     <!-- form -->
-    <EmployeeForm 
+    <EmployeeForm
         v-if="showFrom"
         :employee="defaultEmployeeValue"
         @close="showFrom = false"
