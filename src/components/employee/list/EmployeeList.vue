@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import EmployeeListItem from '@/components/employee/EmployeeListItem.vue';
+import EmployeeListItem from '@/components/employee/list/EmployeeListItem.vue';
 import useEmployeeStore from '@/stores/employee';
 
 const employeeStore = useEmployeeStore();
