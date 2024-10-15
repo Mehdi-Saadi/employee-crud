@@ -43,6 +43,11 @@ const showFrom = ref<boolean>(false);
                     class="text-white bg-green-700 hover:bg-green-800"
                     title="افزودن"
                 />
+                <ButtonComponent
+                    @click="showFrom = false"
+                    class="text-white bg-gray-500 hover:bg-gray-600"
+                    title="انصراف"
+                />
             </div>
         </div>
     </div>
