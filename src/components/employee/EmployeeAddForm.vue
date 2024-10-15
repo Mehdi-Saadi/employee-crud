@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SuccessButton from '@/components/buttons/SuccessButton.vue';
+import ButtonComponent from '@/components/buttons/ButtonComponent.vue';
 import EmployeeFormField from '@/components/employee/EmployeeFormField.vue';
 import { ref } from 'vue';
 
@@ -39,16 +39,19 @@ const showFrom = ref<boolean>(false);
             </div>
             <!-- buttons -->
             <div class="flex items-center justify-between">
-                <SuccessButton title="افزودن" />
+                <ButtonComponent
+                    class="text-white bg-green-700 hover:bg-green-800"
+                    title="افزودن"
+                />
             </div>
         </div>
     </div>
 
     <!-- trigger -->
-    <SuccessButton
+    <ButtonComponent
         v-else
         @click="showFrom = true"
-        class="mx-auto mt-5"
+        class="text-white bg-green-700 hover:bg-green-800 mx-auto mt-5"
         title="افزودن کارمند جدید"
     />
 </template>
