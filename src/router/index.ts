@@ -14,6 +14,6 @@ const router = createRouter({
 });
 
 // set title for each page
-router.afterEach(to => document.title = String(to.meta.title));
+router.afterEach(to => (document.title = String(to.meta.title || 'Employee-CRUD')));
 
 export default router;
