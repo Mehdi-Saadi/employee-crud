@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { InputTypeHTMLAttribute } from 'vue';
+import { onMounted, useTemplateRef, type InputTypeHTMLAttribute } from 'vue';
 
-withDefaults(
+const props = withDefaults(
     defineProps<{
         autofocus?: boolean;
         id: string;
@@ -14,6 +14,13 @@ withDefaults(
 );
 
 const model = defineModel({ required: true });
+const inputField = useTemplateRef('input-ref');
+
+onMounted(() => {
+    if (props.autofocus && inputField.value) {
+        inputField.value.focus();
+    }
+});
 </script>
 
 <template>
@@ -31,6 +38,7 @@ const model = defineModel({ required: true });
             :type
             v-model="model"
             class="border border-gray-300 focus:ring-0 focus:border-gray-400 rounded"
+            ref="input-ref"
         />
     </div>
 </template>
