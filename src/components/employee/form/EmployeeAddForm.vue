@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ButtonComponent from '@/components/buttons/ButtonComponent.vue';
-import EmployeeFormField from '@/components/employee/EmployeeFormField.vue';
+import EmployeeFormField from '@/components/employee/form/EmployeeFormField.vue';
 import { ref } from 'vue';
 
 const showFrom = ref<boolean>(false);

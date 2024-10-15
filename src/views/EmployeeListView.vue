@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import EmployeeAddForm from '@/components/employee/EmployeeAddForm.vue';
+import EmployeeAddForm from '@/components/employee/form/EmployeeAddForm.vue';
 import EmployeeList from '@/components/employee/EmployeeList.vue';
 import EmployeeLayout from '@/layouts/EmployeeLayout.vue';
 import useEmployeeStore from '@/stores/employee';
