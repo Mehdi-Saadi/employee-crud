@@ -16,3 +16,5 @@ export interface Family {
 }
 
 export type EmployeeBrief = Pick<Employee, 'id' | 'firstName' | 'lastName'>;
+
+export type EmployeeToAdd = Omit<Employee, 'id'>;
