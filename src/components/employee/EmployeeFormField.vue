@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import type { InputTypeHTMLAttribute } from 'vue';
+
 withDefaults(
     defineProps<{
-        label: string;
-        id: string;
         autofocus?: boolean;
+        id: string;
+        label: string;
+        type: InputTypeHTMLAttribute;
     }>(),
     {
         autofocus: false,
@@ -25,9 +28,9 @@ const model = defineModel();
             :autofocus
             :id
             :name="id"
+            :type
             v-model="model"
             class="border border-gray-300 focus:ring-0 focus:border-gray-400 rounded"
-            type="text"
         />
     </div>
 </template>
