@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import EmployeeAddForm from '@/components/employee/EmployeeAddForm.vue';
 import EmployeeList from '@/components/employee/EmployeeList.vue';
 import EmployeeLayout from '@/layouts/EmployeeLayout.vue';
 import useEmployeeStore from '@/stores/employee';
@@ -13,5 +14,7 @@ fetchEmployees();
     <EmployeeLayout>
         <EmployeeList v-if="employeeStore.employees.length" />
         <span v-else> در حال بارگیری... </span>
+
+        <EmployeeAddForm />
     </EmployeeLayout>
 </template>
