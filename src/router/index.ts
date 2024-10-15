@@ -7,9 +7,13 @@ const router = createRouter({
         {
             path: '/employees',
             name: 'employee.list',
+            meta: { title: 'کارمندان' },
             component: EmployeeListView,
         },
     ],
 });
+
+// set title for each page
+router.afterEach(to => document.title = String(to.meta.title));
 
 export default router;
