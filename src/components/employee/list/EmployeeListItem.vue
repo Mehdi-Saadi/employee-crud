@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ChevronDownIcon from '@/components/icons/ChevronDownIcon.vue';
+import TrashIcon from '@/components/icons/TrashIcon.vue';
 import useEmployeeStore from '@/stores/employee';
 import type { Employee, EmployeeBrief } from '@/types/employee';
 import { ref } from 'vue';
@@ -8,7 +9,7 @@ const props = defineProps<{
     employee: EmployeeBrief;
 }>();
 
-const { getEmployeeDetails } = useEmployeeStore();
+const { getEmployeeDetails, deleteEmployee } = useEmployeeStore();
 const employeeDetails = ref<Employee | null>(null);
 const showForm = ref<boolean>(false);
 
@@ -40,6 +41,13 @@ const toggleFormVisibility = async (): Promise<void> => {
             v-if="showForm"
             class="flex flex-col"
         >
+            <button
+                @click="deleteEmployee(employee.id)"
+                class="size-10 bg-red-600 hover:bg-red-800 rounded flex items-center justify-center ms-auto me-2"
+                type="button"
+            >
+                <TrashIcon class="size-6 text-white" />
+            </button>
             details
         </div>
     </li>
