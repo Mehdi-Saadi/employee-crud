@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ButtonComponent from '@/components/buttons/ButtonComponent.vue';
+import FamilyForm from '@/components/employee/form/FamilyForm.vue';
 import FormField from '@/components/form/FormField.vue';
 import type { EmployeeToAdd } from '@/types/employee';
 import { cloneDeep } from 'lodash';
@@ -14,6 +15,14 @@ const emit = defineEmits(['close', 'submit']);
 const getDefaultFormValues = (): EmployeeToAdd => cloneDeep(props.employee);
 
 const form = ref<EmployeeToAdd>(getDefaultFormValues());
+
+const addFamilyMember = (): void => {
+    form.value.family.push({
+        name: '',
+        dateOfBirth: '',
+        relation: 'spouse',
+    });
+};
 
 const submit = (): void => {
     emit('submit', form.value);
@@ -56,6 +65,19 @@ const submit = (): void => {
                 label="ایمیل"
                 id="email"
                 type="email"
+            />
+        </div>
+        <!-- family members -->
+        <div class="flex flex-col border rounded p-5 space-y-5">
+            <FamilyForm
+                v-for="(member, index) of form.family"
+                :key="member.name"
+                v-model="form.family[index]"
+            />
+            <ButtonComponent
+                @click="addFamilyMember()"
+                class="text-white bg-blue-500 hover:bg-blue-600"
+                title="افزودن عضو"
             />
         </div>
         <!-- buttons -->
