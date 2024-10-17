@@ -34,7 +34,10 @@ const toggleFormVisibility = async (): Promise<void> => {
             <span>
                 {{ employee.firstName }}
             </span>
-            <ChevronDownIcon class="size-4" />
+            <ChevronDownIcon 
+                class="size-4"
+                :class="{ 'rotate-180': showForm }"
+            />
         </div>
         <!-- details -->
         <div
