@@ -28,6 +28,22 @@ const useEmployeeStore = defineStore('employee', () => {
         }
     };
 
+    const deleteEmployee = async (employeeId: Employee['id']): Promise<void> => {
+        try {
+            await axios.delete(`/employee/${employeeId}`);
+
+            // find and remove employee
+            for (const [index, employee] of employees.value.entries()) {
+                if (employee.id === employeeId) {
+                    employees.value.splice(index, 1);
+                    return;
+                }
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     const addEmployee = async (employee: EmployeeToAdd): Promise<void> => {
         try {
             const response = await axios.post('/employee', employee);
@@ -47,6 +63,7 @@ const useEmployeeStore = defineStore('employee', () => {
         fetchEmployees,
         getEmployeeDetails,
         addEmployee,
+        deleteEmployee,
     };
 });
 
