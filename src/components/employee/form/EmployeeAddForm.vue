@@ -4,10 +4,11 @@ import EmployeeForm from '@/components/employee/form/EmployeeForm.vue';
 import { validateEmployee } from '@/scripts/validation';
 import useEmployeeStore from '@/stores/employee';
 import type { EmployeeToAdd } from '@/types/employee';
-import { ref } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 
 const { addEmployee } = useEmployeeStore();
 const showFrom = ref<boolean>(false);
+const employeeFormRef = useTemplateRef('form-ref');
 
 const defaultEmployeeValue: EmployeeToAdd = {
     firstName: '',
@@ -17,9 +18,11 @@ const defaultEmployeeValue: EmployeeToAdd = {
     family: [],
 };
 
-const submit = (employeeToAdd: EmployeeToAdd): void => {
+const submit = async (employeeToAdd: EmployeeToAdd): Promise<void> => {
     if (validateEmployee(employeeToAdd)) {
-        addEmployee(employeeToAdd);
+        await addEmployee(employeeToAdd);
+
+        employeeFormRef.value?.resetForm();
     }
 };
 </script>
@@ -30,6 +33,7 @@ const submit = (employeeToAdd: EmployeeToAdd): void => {
         v-if="showFrom"
         :employee="defaultEmployeeValue"
         form-type="add"
+        ref="form-ref"
         @close="showFrom = false"
         @submit="submit"
     />
