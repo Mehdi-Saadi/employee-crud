@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import DeleteButton from '@/components/buttons/DeleteButton.vue';
 import FormField from '@/components/form/FormField.vue';
-import TrashIcon from '@/components/icons/TrashIcon.vue';
 import type { FamilyMember } from '@/types/employee';
 
 defineProps<{
@@ -18,14 +18,7 @@ const randomId = crypto.randomUUID();
             class="absolute start-5 top-0 flex items-center space-x-2 rtl:space-x-reverse bg-white px-2"
         >
             <span class="font-bold text-xl"> {{ index }} # </span>
-            <!-- delete button -->
-            <button
-                @click="emit('delete', index)"
-                class="size-10 bg-red-600 hover:bg-red-800 rounded flex items-center justify-center ms-auto me-2"
-                type="button"
-            >
-                <TrashIcon class="size-6 text-white" />
-            </button>
+            <DeleteButton @click="emit('delete', index)" />
         </div>
         <div class="grid grid-cols-2 gap-5 border rounded p-5">
             <FormField
