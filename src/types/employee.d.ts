@@ -9,10 +9,12 @@ export interface Employee {
     family: Family[];
 }
 
+export type FamilyRelation = 'spouse' | 'daughter' | 'son';
+
 export interface Family {
     name: string;
     dateOfBirth: DateOfBirth;
-    relation: 'spouse' | 'daughter' | 'son';
+    relation: FamilyRelation;
 }
 
 export type EmployeeBrief = Pick<Employee, 'id' | 'firstName' | 'lastName'>;
