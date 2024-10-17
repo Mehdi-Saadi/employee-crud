@@ -2,6 +2,7 @@
 import ButtonComponent from '@/components/buttons/ButtonComponent.vue';
 import FormField from '@/components/form/FormField.vue';
 import type { EmployeeToAdd } from '@/types/employee';
+import { cloneDeep } from 'lodash';
 import { ref } from 'vue';
 
 const props = defineProps<{
@@ -10,7 +11,7 @@ const props = defineProps<{
 }>();
 const emit = defineEmits(['close', 'submit']);
 
-const getDefaultFormValues = (): EmployeeToAdd => structuredClone(props.employee);
+const getDefaultFormValues = (): EmployeeToAdd => cloneDeep(props.employee);
 
 const form = ref<EmployeeToAdd>(getDefaultFormValues());
 
