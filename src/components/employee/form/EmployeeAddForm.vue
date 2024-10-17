@@ -22,6 +22,7 @@ const defaultEmployeeValue: EmployeeToAdd = {
     <EmployeeForm
         v-if="showFrom"
         :employee="defaultEmployeeValue"
+        form-type="add"
         @close="showFrom = false"
         @submit="addEmployee"
     />

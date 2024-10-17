@@ -6,6 +6,7 @@ import { ref } from 'vue';
 
 defineProps<{
     employee: EmployeeToAdd;
+    formType: 'add' | 'update';
 }>();
 const emit = defineEmits(['close', 'submit']);
 
@@ -30,7 +31,10 @@ const submit = (): void => {
 </script>
 
 <template>
-    <div class="flex flex-col space-y-5 p-5 border rounded mt-5">
+    <div
+        :class="{ border: formType === 'add' }"
+        class="flex flex-col space-y-5 p-5 rounded mt-5"
+    >
         <!-- employee data -->
         <div class="grid grid-cols-2 gap-5">
             <FormField
@@ -60,13 +64,17 @@ const submit = (): void => {
             />
         </div>
         <!-- buttons -->
-        <div class="flex items-center justify-between">
+        <div
+            :class="[formType === 'add' ? 'justify-between' : 'justify-center']"
+            class="flex items-center"
+        >
             <ButtonComponent
                 @click="submit()"
                 class="text-white bg-green-700 hover:bg-green-800"
-                title="افزودن"
+                :title="formType === 'add' ? 'افزودن' : 'بروزرسانی'"
             />
             <ButtonComponent
+                v-if="formType === 'add'"
                 @click="emit('close')"
                 class="text-white bg-gray-500 hover:bg-gray-600"
                 title="انصراف"
