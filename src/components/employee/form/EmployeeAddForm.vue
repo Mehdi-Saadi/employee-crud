@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ButtonComponent from '@/components/buttons/ButtonComponent.vue';
 import EmployeeForm from '@/components/employee/form/EmployeeForm.vue';
+import { validateEmployee } from '@/scripts/validation';
 import useEmployeeStore from '@/stores/employee';
 import type { EmployeeToAdd } from '@/types/employee';
 import { ref } from 'vue';
@@ -15,6 +16,12 @@ const defaultEmployeeValue: EmployeeToAdd = {
     email: '',
     family: [],
 };
+
+const submit = (employeeToAdd: EmployeeToAdd): void => {
+    if (validateEmployee(employeeToAdd)) {
+        addEmployee(employeeToAdd);
+    }
+};
 </script>
 
 <template>
@@ -24,7 +31,7 @@ const defaultEmployeeValue: EmployeeToAdd = {
         :employee="defaultEmployeeValue"
         form-type="add"
         @close="showFrom = false"
-        @submit="addEmployee"
+        @submit="submit"
     />
 
     <!-- trigger -->
