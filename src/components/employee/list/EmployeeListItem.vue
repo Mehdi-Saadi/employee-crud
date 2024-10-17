@@ -1,26 +1,29 @@
 <script setup lang="ts">
 import ChevronDownIcon from '@/components/icons/ChevronDownIcon.vue';
 import EmployeeUpdateForm from '@/components/employee/form/EmployeeUpdateForm.vue';
+import DeleteButton from '@/components/buttons/DeleteButton.vue';
 import useEmployeeStore from '@/stores/employee';
 import type { Employee, EmployeeBrief } from '@/types/employee';
 import { ref } from 'vue';
-import DeleteButton from '@/components/buttons/DeleteButton.vue';
 
 const props = defineProps<{
     employee: EmployeeBrief;
 }>();
 
-const { getEmployeeDetails, deleteEmployee } = useEmployeeStore();
+const employeeStore = useEmployeeStore();
+const { getEmployeeDetails, deleteEmployee } = employeeStore;
 const employeeDetails = ref<Employee | null>(null);
 const showForm = ref<boolean>(false);
 
 const toggleFormVisibility = async (): Promise<void> => {
     if (showForm.value) {
         showForm.value = false;
+    
         employeeDetails.value = null;
     } else {
-        employeeDetails.value = await getEmployeeDetails(props.employee.id);
         showForm.value = true;
+
+        employeeDetails.value = await getEmployeeDetails(props.employee.id);
     }
 };
 </script>
@@ -45,7 +48,13 @@ const toggleFormVisibility = async (): Promise<void> => {
             v-if="showForm"
             class="flex flex-col"
         >
-            <template v-if="employeeDetails">
+            <span
+                v-if="employeeStore.isLoading.getEmployeeDetails"
+                class="mx-auto my-4"
+            >
+                در حال بارگیری...
+            </span>
+            <template v-else-if="employeeDetails">
                 <DeleteButton @click="deleteEmployee(employee.id)" />
 
                 <EmployeeUpdateForm
