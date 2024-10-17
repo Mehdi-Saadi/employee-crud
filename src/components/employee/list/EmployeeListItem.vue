@@ -55,8 +55,8 @@ const toggleFormVisibility = async (): Promise<void> => {
                 در حال بارگیری...
             </span>
             <template v-else-if="employeeDetails">
-                <DeleteButton 
-                    @click="deleteEmployee(employee.id)" 
+                <DeleteButton
+                    @click="deleteEmployee(employee.id)"
                     :disabled="employeeStore.isLoading.deleteEmployee"
                 />
 
