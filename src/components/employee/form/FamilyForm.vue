@@ -14,10 +14,10 @@ const randomId = crypto.randomUUID();
 
 <template>
     <div class="relative pt-5">
-        <div class="absolute start-5 top-0 flex items-center space-x-2 rtl:space-x-reverse bg-white px-2">
-            <span class="font-bold text-xl">
-                {{ index }} #
-            </span>
+        <div
+            class="absolute start-5 top-0 flex items-center space-x-2 rtl:space-x-reverse bg-white px-2"
+        >
+            <span class="font-bold text-xl"> {{ index }} # </span>
             <!-- delete button -->
             <button
                 @click="emit('delete', index)"
