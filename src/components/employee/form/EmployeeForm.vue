@@ -4,29 +4,23 @@ import FormField from '@/components/form/FormField.vue';
 import type { EmployeeToAdd } from '@/types/employee';
 import { ref } from 'vue';
 
-defineProps<{
+const props = defineProps<{
     employee: EmployeeToAdd;
     formType: 'add' | 'update';
 }>();
 const emit = defineEmits(['close', 'submit']);
 
-const getDefaultFormValues = (): EmployeeToAdd => {
-    return {
-        firstName: '',
-        lastName: '',
-        dateOfBirth: '',
-        email: '',
-        family: [],
-    };
-};
+const getDefaultFormValues = (): EmployeeToAdd => structuredClone(props.employee);
 
 const form = ref<EmployeeToAdd>(getDefaultFormValues());
 
 const submit = (): void => {
     emit('submit', form.value);
 
-    // reset form fields to default
-    form.value = getDefaultFormValues();
+    if (props.formType === 'add') {
+        // reset form fields to default
+        form.value = getDefaultFormValues();
+    }
 };
 </script>
 
