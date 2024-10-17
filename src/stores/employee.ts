@@ -1,4 +1,4 @@
-import type { EmployeeBrief, EmployeeToAdd } from '@/types/employee';
+import type { Employee, EmployeeBrief, EmployeeToAdd } from '@/types/employee';
 import axios from 'axios';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
@@ -13,6 +13,18 @@ const useEmployeeStore = defineStore('employee', () => {
             employees.value = response.data;
         } catch (error) {
             console.error(error);
+        }
+    };
+
+    const getEmployeeDetails = async (employeeId: Employee['id']): Promise<Employee | null> => {
+        try {
+            const response = await axios.get(`/employee/${employeeId}`);
+
+            return response.data;
+        } catch (error) {
+            console.error(error);
+
+            return null;
         }
     };
 
@@ -33,6 +45,7 @@ const useEmployeeStore = defineStore('employee', () => {
     return {
         employees,
         fetchEmployees,
+        getEmployeeDetails,
         addEmployee,
     };
 });
