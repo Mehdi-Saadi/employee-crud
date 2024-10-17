@@ -22,6 +22,6 @@ export const toastAlert = (icon: any, title: any): void => {
     toast.fire({
         icon: icon,
         title: title,
-        position: 'bottom-start',
+        position: 'bottom-end',
     });
 };
