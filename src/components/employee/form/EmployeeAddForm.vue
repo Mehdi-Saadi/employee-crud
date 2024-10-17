@@ -9,8 +9,7 @@ import { ref, useTemplateRef } from 'vue';
 const { addEmployee } = useEmployeeStore();
 const showFrom = ref<boolean>(false);
 
-type EmployeeFormType = InstanceType<typeof EmployeeForm>;
-const employeeFormRef = useTemplateRef<EmployeeFormType>('form-ref');
+const employeeFormRef = useTemplateRef<InstanceType<typeof EmployeeForm>>('form-ref');
 
 const defaultEmployeeValue: EmployeeToAdd = {
     firstName: '',
