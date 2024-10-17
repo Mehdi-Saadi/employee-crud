@@ -6,12 +6,12 @@ export interface Employee {
     lastName: string;
     email: string;
     dateOfBirth: DateOfBirth;
-    family: Family[];
+    family: FamilyMember[];
 }
 
 export type FamilyRelation = 'spouse' | 'daughter' | 'son';
 
-export interface Family {
+export interface FamilyMember {
     name: string;
     dateOfBirth: DateOfBirth;
     relation: FamilyRelation;
