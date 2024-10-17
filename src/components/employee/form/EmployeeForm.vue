@@ -28,14 +28,11 @@ const deleteFamilyMember = (index: number): void => {
     form.value.family.splice(index, 1);
 };
 
-const submit = (): void => {
-    emit('submit', form.value);
-
-    if (props.formType === 'add') {
-        // reset form fields to default
-        form.value = getDefaultFormValues();
-    }
+const resetForm = (): void => {
+    form.value = getDefaultFormValues();
 };
+
+defineExpose({ resetForm });
 </script>
 
 <template>
@@ -92,7 +89,7 @@ const submit = (): void => {
             class="flex items-center"
         >
             <ButtonComponent
-                @click="submit()"
+                @click="emit('submit', form)"
                 class="text-white bg-green-700 hover:bg-green-800"
                 :title="formType === 'add' ? 'افزودن' : 'بروزرسانی'"
             />
