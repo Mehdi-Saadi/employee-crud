@@ -48,26 +48,26 @@ const submit = (): void => {
             <FormField
                 :autofocus="true"
                 v-model="form.firstName"
-                id="name"
+                name="name"
                 label="نام"
                 type="text"
             />
             <FormField
                 v-model="form.lastName"
                 label="نام خانوادگی"
-                id="last-name"
+                name="last-name"
                 type="text"
             />
             <FormField
                 v-model="form.dateOfBirth"
                 label="تاریخ تولد"
-                id="date-of-birth"
+                name="date-of-birth"
                 type="date"
             />
             <FormField
                 v-model="form.email"
                 label="ایمیل"
-                id="email"
+                name="email"
                 type="email"
             />
         </div>

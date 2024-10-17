@@ -4,7 +4,7 @@ import { onMounted, useTemplateRef, type InputTypeHTMLAttribute } from 'vue';
 const props = withDefaults(
     defineProps<{
         autofocus?: boolean;
-        id: string;
+        name: string;
         label: string;
         type: InputTypeHTMLAttribute;
     }>(),
@@ -15,6 +15,7 @@ const props = withDefaults(
 
 const model = defineModel({ required: true });
 const inputField = useTemplateRef('input-ref');
+const randomId = crypto.randomUUID();
 
 onMounted(() => {
     if (props.autofocus && inputField.value) {
@@ -26,15 +27,15 @@ onMounted(() => {
 <template>
     <div class="flex flex-col">
         <label
-            :for="id"
+            :for="randomId"
             class="px-3"
         >
             {{ label }}
         </label>
         <input
             :autofocus
-            :id
-            :name="id"
+            :id="randomId"
+            :name
             :type
             v-model="model"
             class="border border-gray-300 focus:ring-0 focus:border-gray-400 rounded"

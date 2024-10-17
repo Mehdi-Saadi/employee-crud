@@ -9,6 +9,7 @@ defineProps<{
 const emit = defineEmits(['delete']);
 
 const model = defineModel<FamilyMember>({ required: true });
+const randomId = crypto.randomUUID();
 </script>
 
 <template>
@@ -30,26 +31,26 @@ const model = defineModel<FamilyMember>({ required: true });
             <FormField
                 :autofocus="true"
                 v-model="model.name"
-                id="name"
+                name="name"
                 label="نام"
                 type="text"
             />
             <FormField
                 v-model="model.dateOfBirth"
                 label="تاریخ تولد"
-                id="date-of-birth"
+                name="date-of-birth"
                 type="date"
             />
             <div class="flex flex-col">
                 <label
-                    for="id"
+                    :for="randomId"
                     class="px-3"
                 >
                     نسبت
                 </label>
                 <select
                     class="border border-gray-300 focus:ring-0 focus:border-gray-400 rounded"
-                    id="relation"
+                    :id="randomId"
                     name="relation"
                     v-model="model.relation"
                 >
