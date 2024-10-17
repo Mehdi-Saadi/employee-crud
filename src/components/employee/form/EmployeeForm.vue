@@ -2,6 +2,7 @@
 import ButtonComponent from '@/components/buttons/ButtonComponent.vue';
 import FamilyForm from '@/components/employee/form/FamilyForm.vue';
 import FormField from '@/components/form/FormField.vue';
+import useEmployeeStore from '@/stores/employee';
 import type { EmployeeToAdd } from '@/types/employee';
 import { cloneDeep } from 'lodash';
 import { ref } from 'vue';
@@ -12,6 +13,7 @@ const props = defineProps<{
 }>();
 const emit = defineEmits(['close', 'submit']);
 
+const employeeStore = useEmployeeStore();
 const getDefaultFormValues = (): EmployeeToAdd => cloneDeep(props.employee);
 
 const form = ref<EmployeeToAdd>(getDefaultFormValues());
@@ -90,8 +92,13 @@ defineExpose({ resetForm });
         >
             <ButtonComponent
                 @click="emit('submit', form)"
-                class="text-white bg-green-700 hover:bg-green-800"
+                class="text-white bg-green-700 hover:bg-green-800 disabled:hover:bg-green-700"
                 :title="formType === 'add' ? 'افزودن' : 'بروزرسانی'"
+                :disabled="
+                    formType === 'add'
+                        ? employeeStore.isLoading.addEmployee
+                        : employeeStore.isLoading.updateEmployee
+                "
             />
             <ButtonComponent
                 v-if="formType === 'add'"
