@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import ButtonComponent from '@/components/buttons/ButtonComponent.vue';
 import EmployeeForm from '@/components/employee/form/EmployeeForm.vue';
-import { validateEmployee } from '@/scripts/validation';
 import useEmployeeStore from '@/stores/employee';
+import { validateEmployee } from '@/scripts/validation';
 import type { EmployeeToAdd } from '@/types/employee';
 import { ref, useTemplateRef } from 'vue';
 
 const { addEmployee } = useEmployeeStore();
 const showFrom = ref<boolean>(false);
-const employeeFormRef = useTemplateRef('form-ref');
+
+type EmployeeFormType = InstanceType<typeof EmployeeForm>;
+const employeeFormRef = useTemplateRef<EmployeeFormType>('form-ref');
 
 const defaultEmployeeValue: EmployeeToAdd = {
     firstName: '',
