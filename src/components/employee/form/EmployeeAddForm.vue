@@ -32,6 +32,6 @@ const defaultEmployeeValue: EmployeeToAdd = {
         v-else
         @click="showFrom = true"
         class="text-white bg-green-700 hover:bg-green-800 mx-auto mt-5"
-        title="افزودن کارمند جدید"
+        title="افزودن کارمند"
     />
 </template>
