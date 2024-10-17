@@ -57,10 +57,7 @@ const toggleFormVisibility = async (): Promise<void> => {
             <template v-else-if="employeeDetails">
                 <DeleteButton @click="deleteEmployee(employee.id)" />
 
-                <EmployeeUpdateForm
-                    :employee="employeeDetails"
-                    @close="showForm = false"
-                />
+                <EmployeeUpdateForm :employee="employeeDetails" />
             </template>
             <span
                 v-else
