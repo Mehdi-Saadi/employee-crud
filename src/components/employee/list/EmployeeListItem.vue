@@ -55,7 +55,7 @@ const toggleFormVisibility = async (): Promise<void> => {
                     <TrashIcon class="size-6 text-white" />
                 </button>
 
-                <EmployeeUpdateForm 
+                <EmployeeUpdateForm
                     :employee="employeeDetails"
                     @close="showForm = false"
                 />

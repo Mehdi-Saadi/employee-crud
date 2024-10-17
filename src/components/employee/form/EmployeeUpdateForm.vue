@@ -17,7 +17,7 @@ const submit = (employee: EmployeeToAdd): void => {
         id: id,
         ...cloneDeep(employee),
     });
-    
+
     emit('close');
 };
 </script>
