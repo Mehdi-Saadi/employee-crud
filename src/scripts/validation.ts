@@ -1,5 +1,5 @@
-import type { EmployeeToAdd } from "@/types/employee";
-import { toastAlert } from "@/scripts/sweetalert";
+import type { EmployeeToAdd } from '@/types/employee';
+import { toastAlert } from '@/scripts/sweetalert';
 
 /**
  * returns true if email is valid, otherwise false
@@ -12,7 +12,7 @@ export const validateEmail = (input: any): boolean => {
 };
 
 export const validateEmployee = (employee: EmployeeToAdd): boolean => {
-    const validations: {field: keyof EmployeeToAdd, message: string}[] = [
+    const validations: { field: keyof EmployeeToAdd; message: string }[] = [
         { field: 'firstName', message: 'فیلد نام ضروری است!' },
         { field: 'lastName', message: 'فیلد نام خانوادگی ضروری است!' },
         { field: 'dateOfBirth', message: 'فیلد تاریخ تولد ضروری است!' },
@@ -28,7 +28,7 @@ export const validateEmployee = (employee: EmployeeToAdd): boolean => {
 
     if (!validateEmail(employee.email)) {
         toastAlert('error', 'ایمیل نا معتبر است!');
-        
+
         return false;
     }
 

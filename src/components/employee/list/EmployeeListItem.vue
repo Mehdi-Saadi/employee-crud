@@ -18,7 +18,7 @@ const showForm = ref<boolean>(false);
 const toggleFormVisibility = async (): Promise<void> => {
     if (showForm.value) {
         showForm.value = false;
-    
+
         employeeDetails.value = null;
     } else {
         showForm.value = true;
