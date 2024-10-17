@@ -34,7 +34,7 @@ const toggleFormVisibility = async (): Promise<void> => {
             <span>
                 {{ employee.firstName }}
             </span>
-            <ChevronDownIcon 
+            <ChevronDownIcon
                 class="size-4"
                 :class="{ 'rotate-180': showForm }"
             />
@@ -44,14 +44,21 @@ const toggleFormVisibility = async (): Promise<void> => {
             v-if="showForm"
             class="flex flex-col"
         >
-            <button
-                @click="deleteEmployee(employee.id)"
-                class="size-10 bg-red-600 hover:bg-red-800 rounded flex items-center justify-center ms-auto me-2"
-                type="button"
+            <template v-if="employeeDetails">
+                <button
+                    @click="deleteEmployee(employee.id)"
+                    class="size-10 bg-red-600 hover:bg-red-800 rounded flex items-center justify-center ms-auto me-2"
+                    type="button"
+                >
+                    <TrashIcon class="size-6 text-white" />
+                </button>
+            </template>
+            <span
+                v-else
+                class="mx-auto my-4"
             >
-                <TrashIcon class="size-6 text-white" />
-            </button>
-            details
+                نتیجه ای یافت نشد...
+            </span>
         </div>
     </li>
 </template>
