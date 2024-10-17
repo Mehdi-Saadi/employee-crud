@@ -24,6 +24,10 @@ const addFamilyMember = (): void => {
     });
 };
 
+const deleteFamilyMember = (index: number): void => {
+    form.value.family.splice(index, 1);
+};
+
 const submit = (): void => {
     emit('submit', form.value);
 
@@ -71,8 +75,10 @@ const submit = (): void => {
         <div class="flex flex-col border rounded p-5 space-y-5">
             <FamilyForm
                 v-for="(member, index) of form.family"
+                :index
                 :key="member.name"
                 v-model="form.family[index]"
+                @delete="deleteFamilyMember"
             />
             <ButtonComponent
                 @click="addFamilyMember()"
