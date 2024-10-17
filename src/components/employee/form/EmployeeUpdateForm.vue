@@ -12,8 +12,8 @@ const emit = defineEmits(['close']);
 const { updateEmployee } = useEmployeeStore();
 const { id, ...defaultEmployeeValue } = cloneDeep(props.employee);
 
-const submit = (employee: EmployeeToAdd): void => {
-    updateEmployee({
+const submit = async (employee: EmployeeToAdd): Promise<void> => {
+    await updateEmployee({
         id: id,
         ...cloneDeep(employee),
     });
