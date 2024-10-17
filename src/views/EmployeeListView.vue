@@ -12,13 +12,19 @@ fetchEmployees();
 
 <template>
     <EmployeeLayout>
-        <EmployeeList v-if="employeeStore.employees.length" />
         <span
-            v-else
+            v-if="employeeStore.isLoading.fetchEmployees"
             class="mt-8 mb-3 mx-auto"
         >
             در حال بارگیری...
         </span>
+        <span
+            v-else-if="employeeStore.employees.length === 0"
+            class="mt-8 mb-3 mx-auto"
+        >
+            نتیجه ای برای نمایش وجود ندارد...
+        </span>
+        <EmployeeList v-else />
 
         <EmployeeAddForm />
     </EmployeeLayout>
