@@ -37,6 +37,12 @@ const resetForm = (): void => {
 };
 
 defineExpose({ resetForm });
+
+const submitForm = (values: any): void => {
+    console.log(values);
+
+    // emit('submit', values);
+};
 </script>
 
 <template>
@@ -44,7 +50,7 @@ defineExpose({ resetForm });
         :class="{ border: formType === 'add' }"
         :initial-values="employee"
         class="flex flex-col space-y-5 p-5 rounded mt-5"
-        @submit="values => console.log(values)"
+        @submit="submitForm"
     >
         <!-- employee data -->
         <div class="grid grid-cols-2 gap-5">
