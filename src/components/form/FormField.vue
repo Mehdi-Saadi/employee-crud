@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { onMounted, useTemplateRef, type InputTypeHTMLAttribute } from 'vue';
+import { Field, ErrorMessage } from 'vee-validate';
+import { type InputTypeHTMLAttribute } from 'vue';
 
-const props = withDefaults(
+withDefaults(
     defineProps<{
         autofocus?: boolean;
         name: string;
         label: string;
         type: InputTypeHTMLAttribute;
+        rules?: any;
     }>(),
     {
         autofocus: false,
@@ -14,14 +16,7 @@ const props = withDefaults(
 );
 
 const model = defineModel({ required: true });
-const inputField = useTemplateRef('input-ref');
 const randomId = crypto.randomUUID();
-
-onMounted(() => {
-    if (props.autofocus && inputField.value) {
-        inputField.value.focus();
-    }
-});
 </script>
 
 <template>
@@ -32,14 +27,18 @@ onMounted(() => {
         >
             {{ label }}
         </label>
-        <input
+        <Field
             :autofocus
             :id="randomId"
             :name
+            :rules
             :type
             v-model="model"
             class="border border-gray-300 focus:ring-0 focus:border-gray-400 rounded"
-            ref="input-ref"
+        />
+        <ErrorMessage
+            :name
+            class="text-xs text-red-700 mt-1 ps-3"
         />
     </div>
 </template>
