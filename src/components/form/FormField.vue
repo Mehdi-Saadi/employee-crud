@@ -3,12 +3,12 @@ import { Field, ErrorMessage } from 'vee-validate';
 import { type InputTypeHTMLAttribute } from 'vue';
 
 defineProps<{
+    name: string;
     label: string;
     type: InputTypeHTMLAttribute;
     rules?: any;
 }>();
 
-const model = defineModel({ required: true });
 const randomId = crypto.randomUUID();
 </script>
 
@@ -22,14 +22,13 @@ const randomId = crypto.randomUUID();
         </label>
         <Field
             :id="randomId"
-            :name="randomId"
+            :name
             :rules
             :type
-            v-model="model"
             class="border border-gray-300 focus:ring-0 focus:border-gray-400 rounded"
         />
         <ErrorMessage
-            :name="randomId"
+            :name
             class="text-xs text-red-700 mt-1 ps-3"
         />
     </div>

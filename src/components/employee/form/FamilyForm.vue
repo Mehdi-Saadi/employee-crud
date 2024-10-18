@@ -2,7 +2,6 @@
 import DeleteButton from '@/components/buttons/DeleteButton.vue';
 import FormField from '@/components/form/FormField.vue';
 import { validateRelation, validateString } from '@/scripts/validation';
-import type { FamilyMember } from '@/types/employee';
 import { Field, ErrorMessage } from 'vee-validate';
 
 defineProps<{
@@ -10,7 +9,6 @@ defineProps<{
 }>();
 const emit = defineEmits(['delete']);
 
-const model = defineModel<FamilyMember>({ required: true });
 const randomId = crypto.randomUUID();
 </script>
 
@@ -25,13 +23,13 @@ const randomId = crypto.randomUUID();
         <div class="grid grid-cols-2 gap-5 border rounded p-5">
             <FormField
                 :rules="validateString"
-                v-model="model.name"
+                :name="`family[${index}].name`"
                 label="نام"
                 type="text"
             />
             <FormField
                 :rules="validateString"
-                v-model="model.dateOfBirth"
+                :name="`family[${index}].dateOfBirth`"
                 label="تاریخ تولد"
                 type="date"
             />
@@ -44,9 +42,8 @@ const randomId = crypto.randomUUID();
                 </label>
                 <Field
                     :id="randomId"
-                    :name="randomId"
                     :rules="validateRelation"
-                    v-model="model.relation"
+                    :name="`family[${index}].relation`"
                     as="select"
                     class="border border-gray-300 focus:ring-0 focus:border-gray-400 rounded"
                 >
@@ -55,7 +52,7 @@ const randomId = crypto.randomUUID();
                     <option value="son">پسر</option>
                 </Field>
                 <ErrorMessage
-                    :name="randomId"
+                    :name="`family[${index}].relation`"
                     class="text-xs text-red-700 mt-1 ps-3"
                 />
             </div>

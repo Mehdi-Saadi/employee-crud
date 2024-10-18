@@ -43,31 +43,31 @@ defineExpose({ resetForm });
     <Form
         :class="{ border: formType === 'add' }"
         class="flex flex-col space-y-5 p-5 rounded mt-5"
-        @submit="emit('submit', form)"
+        @submit="values => console.log(values)"
     >
         <!-- employee data -->
         <div class="grid grid-cols-2 gap-5">
             <FormField
                 :rules="validateString"
-                v-model="form.firstName"
+                name="firstName"
                 label="نام"
                 type="text"
             />
             <FormField
                 :rules="validateString"
-                v-model="form.lastName"
+                name="lastName"
                 label="نام خانوادگی"
                 type="text"
             />
             <FormField
                 :rules="validateString"
-                v-model="form.dateOfBirth"
+                name="dateOfBirth"
                 label="تاریخ تولد"
                 type="date"
             />
             <FormField
                 :rules="validateEmail"
-                v-model="form.email"
+                name="email"
                 label="ایمیل"
                 type="email"
             />
@@ -78,7 +78,6 @@ defineExpose({ resetForm });
                 v-for="(member, index) of form.family"
                 :index
                 :key="member.name"
-                v-model="form.family[index]"
                 @delete="deleteFamilyMember"
             />
             <ButtonComponent
