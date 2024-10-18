@@ -2,13 +2,21 @@ import type { EmployeeToAdd } from '@/types/employee';
 import { toastAlert } from '@/scripts/sweetalert';
 
 /**
- * returns true if email is valid, otherwise false
- * @param input
- * @returns boolean
+ * Returns true on success, otherwise error message
+ * @param value 
+ * @returns string | true
  */
-export const validateEmail = (input: any): boolean => {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(String(input).toLowerCase());
+export const validateEmail = (value: any): string | true => {
+    if (!value) {
+        return 'این فیلد الزامی است';
+    }
+
+    const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    if (!regex.test(value)) {
+        return 'این فیلد باید یک ایمیل معتبر باشد';
+    }
+
+    return true;
 };
 
 export const validateEmployee = (employee: EmployeeToAdd): boolean => {
