@@ -51,7 +51,6 @@ defineExpose({ resetForm });
                 :autofocus="true"
                 :rules="validateString"
                 v-model="form.firstName"
-                name="name"
                 label="نام"
                 type="text"
             />
@@ -59,21 +58,18 @@ defineExpose({ resetForm });
                 :rules="validateString"
                 v-model="form.lastName"
                 label="نام خانوادگی"
-                name="last-name"
                 type="text"
             />
             <FormField
                 :rules="validateString"
                 v-model="form.dateOfBirth"
                 label="تاریخ تولد"
-                name="date-of-birth"
                 type="date"
             />
             <FormField
                 :rules="validateEmail"
                 v-model="form.email"
                 label="ایمیل"
-                name="email"
                 type="email"
             />
         </div>

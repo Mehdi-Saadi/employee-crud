@@ -27,7 +27,6 @@ const randomId = crypto.randomUUID();
                 :autofocus="true"
                 :rules="validateString"
                 v-model="model.name"
-                name="name"
                 label="نام"
                 type="text"
             />
@@ -35,7 +34,6 @@ const randomId = crypto.randomUUID();
                 :rules="validateString"
                 v-model="model.dateOfBirth"
                 label="تاریخ تولد"
-                name="date-of-birth"
                 type="date"
             />
             <div class="flex flex-col">
@@ -47,19 +45,19 @@ const randomId = crypto.randomUUID();
                 </label>
                 <Field
                     :id="randomId"
+                    :name="randomId"
                     :rules="validateRelation"
                     v-model="model.relation"
                     as="select"
                     class="border border-gray-300 focus:ring-0 focus:border-gray-400 rounded"
-                    name="relation"
                 >
                     <option value="spouse">همسر</option>
                     <option value="daughter">دختر</option>
                     <option value="son">پسر</option>
                 </Field>
                 <ErrorMessage
+                    :name="randomId"
                     class="text-xs text-red-700 mt-1 ps-3"
-                    name="relation"
                 />
             </div>
         </div>
