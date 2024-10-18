@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Field, ErrorMessage } from 'vee-validate';
+import { Field, ErrorMessage, useForm } from 'vee-validate';
 import { type InputTypeHTMLAttribute } from 'vue';
 
 defineProps<{
@@ -10,6 +10,7 @@ defineProps<{
 }>();
 
 const randomId = crypto.randomUUID();
+const { errors } = useForm();
 </script>
 
 <template>
@@ -25,7 +26,12 @@ const randomId = crypto.randomUUID();
             :name
             :rules
             :type
-            class="border border-gray-300 focus:ring-0 focus:border-gray-400 rounded"
+            :class="
+                errors[name]
+                    ? 'border-red-700 focus:border-red-700'
+                    : 'border-gray-300 focus:border-gray-400'
+            "
+            class="border focus:ring-0 rounded"
         />
         <ErrorMessage
             :name
