@@ -3,7 +3,7 @@ import { toastAlert } from '@/scripts/sweetalert';
 
 /**
  * Returns true on success, otherwise error message
- * @param value 
+ * @param value
  * @returns string | true
  */
 export const validateEmail = (value: any): string | true => {
@@ -21,14 +21,15 @@ export const validateEmail = (value: any): string | true => {
 
 /**
  * Returns true on success, otherwise error message
- * @param value 
+ * @param value
  * @returns string | true
  */
-export const validateString = (value: any): string | true => String(value).trim() ? true : 'این فیلد الزامی است';
+export const validateString = (value: any): string | true =>
+    String(value).trim() ? true : 'این فیلد الزامی است';
 
 /**
  * Returns true on success, otherwise error message
- * @param value 
+ * @param value
  * @returns string | true
  */
 export const validateRelation = (value: any): string | true => {
@@ -38,7 +39,7 @@ export const validateRelation = (value: any): string | true => {
 
     const relations: FamilyRelation[] = ['spouse', 'son', 'daughter'];
 
-    if (! relations.includes(value)) {
+    if (!relations.includes(value)) {
         return 'مقدار نامعتبر است';
     }
 

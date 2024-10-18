@@ -5,10 +5,10 @@ withDefaults(
     defineProps<{
         title: string;
         disabled?: boolean;
-        type?: 'button' | 'submit'
+        type?: 'button' | 'submit';
     }>(),
     {
-        type: 'button'
+        type: 'button',
     }
 );
 </script>
