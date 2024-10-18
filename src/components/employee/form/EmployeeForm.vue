@@ -42,6 +42,7 @@ defineExpose({ resetForm });
 <template>
     <Form
         :class="{ border: formType === 'add' }"
+        :initial-values="employee"
         class="flex flex-col space-y-5 p-5 rounded mt-5"
         @submit="values => console.log(values)"
     >

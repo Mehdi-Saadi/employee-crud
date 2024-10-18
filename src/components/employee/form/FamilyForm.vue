@@ -42,8 +42,8 @@ const randomId = crypto.randomUUID();
                 </label>
                 <Field
                     :id="randomId"
-                    :rules="validateRelation"
                     :name="`family[${index}].relation`"
+                    :rules="validateRelation"
                     as="select"
                     class="border border-gray-300 focus:ring-0 focus:border-gray-400 rounded"
                 >
