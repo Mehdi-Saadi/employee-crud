@@ -3,7 +3,9 @@ import ButtonComponent from '@/components/buttons/ButtonComponent.vue';
 import FamilyForm from '@/components/employee/form/FamilyForm.vue';
 import FormField from '@/components/form/FormField.vue';
 import useEmployeeStore from '@/stores/employee';
+import { validateEmail, validateString } from '@/scripts/validation';
 import type { EmployeeToAdd } from '@/types/employee';
+import { Form } from 'vee-validate';
 import { cloneDeep } from 'lodash';
 import { ref } from 'vue';
 
@@ -38,32 +40,37 @@ defineExpose({ resetForm });
 </script>
 
 <template>
-    <div
+    <Form
         :class="{ border: formType === 'add' }"
         class="flex flex-col space-y-5 p-5 rounded mt-5"
+        @submit="emit('submit', form)"
     >
         <!-- employee data -->
         <div class="grid grid-cols-2 gap-5">
             <FormField
                 :autofocus="true"
+                :rules="validateString"
                 v-model="form.firstName"
                 name="name"
                 label="نام"
                 type="text"
             />
             <FormField
+                :rules="validateString"
                 v-model="form.lastName"
                 label="نام خانوادگی"
                 name="last-name"
                 type="text"
             />
             <FormField
+                :rules="validateString"
                 v-model="form.dateOfBirth"
                 label="تاریخ تولد"
                 name="date-of-birth"
                 type="date"
             />
             <FormField
+                :rules="validateEmail"
                 v-model="form.email"
                 label="ایمیل"
                 name="email"
@@ -91,14 +98,14 @@ defineExpose({ resetForm });
             class="flex items-center"
         >
             <ButtonComponent
-                @click="emit('submit', form)"
-                class="text-white bg-green-700 hover:bg-green-800 disabled:hover:bg-green-700"
-                :title="formType === 'add' ? 'افزودن' : 'بروزرسانی'"
                 :disabled="
                     formType === 'add'
                         ? employeeStore.isLoading.addEmployee
                         : employeeStore.isLoading.updateEmployee
                 "
+                :title="formType === 'add' ? 'افزودن' : 'بروزرسانی'"
+                class="text-white bg-green-700 hover:bg-green-800 disabled:hover:bg-green-700"
+                type="submit"
             />
             <ButtonComponent
                 v-if="formType === 'add'"
@@ -107,5 +114,5 @@ defineExpose({ resetForm });
                 title="انصراف"
             />
         </div>
-    </div>
+    </Form>
 </template>
