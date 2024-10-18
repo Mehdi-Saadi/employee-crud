@@ -1,4 +1,4 @@
-import type { EmployeeToAdd } from '@/types/employee';
+import type { EmployeeToAdd, FamilyRelation } from '@/types/employee';
 import { toastAlert } from '@/scripts/sweetalert';
 
 /**
@@ -25,6 +25,25 @@ export const validateEmail = (value: any): string | true => {
  * @returns string | true
  */
 export const validateString = (value: any): string | true => String(value).trim() ? true : 'این فیلد الزامی است';
+
+/**
+ * Returns true on success, otherwise error message
+ * @param value 
+ * @returns string | true
+ */
+export const validateRelation = (value: any): string | true => {
+    if (!value) {
+        return 'این فیلد الزامی است';
+    }
+
+    const relations: FamilyRelation[] = ['spouse', 'son', 'daughter'];
+
+    if (! relations.includes(value)) {
+        return 'مقدار نامعتبر است';
+    }
+
+    return true;
+};
 
 export const validateEmployee = (employee: EmployeeToAdd): boolean => {
     const validations: { field: keyof EmployeeToAdd; message: string }[] = [
