@@ -24,7 +24,6 @@ const randomId = crypto.randomUUID();
         </div>
         <div class="grid grid-cols-2 gap-5 border rounded p-5">
             <FormField
-                :autofocus="true"
                 :rules="validateString"
                 v-model="model.name"
                 label="نام"

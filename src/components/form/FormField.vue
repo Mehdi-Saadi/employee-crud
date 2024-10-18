@@ -2,17 +2,11 @@
 import { Field, ErrorMessage } from 'vee-validate';
 import { type InputTypeHTMLAttribute } from 'vue';
 
-withDefaults(
-    defineProps<{
-        autofocus?: boolean;
-        label: string;
-        type: InputTypeHTMLAttribute;
-        rules?: any;
-    }>(),
-    {
-        autofocus: false,
-    }
-);
+defineProps<{
+    label: string;
+    type: InputTypeHTMLAttribute;
+    rules?: any;
+}>();
 
 const model = defineModel({ required: true });
 const randomId = crypto.randomUUID();
@@ -27,7 +21,6 @@ const randomId = crypto.randomUUID();
             {{ label }}
         </label>
         <Field
-            :autofocus
             :id="randomId"
             :name="randomId"
             :rules

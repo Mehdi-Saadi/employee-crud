@@ -48,7 +48,6 @@ defineExpose({ resetForm });
         <!-- employee data -->
         <div class="grid grid-cols-2 gap-5">
             <FormField
-                :autofocus="true"
                 :rules="validateString"
                 v-model="form.firstName"
                 label="نام"
