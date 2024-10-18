@@ -32,6 +32,7 @@ const { errors } = useForm();
                     : 'border-gray-300 focus:border-gray-400'
             "
             class="border focus:ring-0 rounded"
+            :validate-on-input="true"
         />
         <ErrorMessage
             :name
