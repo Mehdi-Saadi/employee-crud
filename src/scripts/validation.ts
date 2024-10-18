@@ -19,6 +19,13 @@ export const validateEmail = (value: any): string | true => {
     return true;
 };
 
+/**
+ * Returns true on success, otherwise error message
+ * @param value 
+ * @returns string | true
+ */
+export const validateString = (value: any): string | true => String(value).trim() ? true : 'این فیلد الزامی است';
+
 export const validateEmployee = (employee: EmployeeToAdd): boolean => {
     const validations: { field: keyof EmployeeToAdd; message: string }[] = [
         { field: 'firstName', message: 'فیلد نام ضروری است!' },
