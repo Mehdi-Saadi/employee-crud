@@ -1,5 +1,4 @@
-import type { EmployeeToAdd, FamilyRelation } from '@/types/employee';
-import { toastAlert } from '@/scripts/sweetalert';
+import type { FamilyRelation } from '@/types/employee';
 
 /**
  * Returns true on success, otherwise error message
@@ -41,30 +40,6 @@ export const validateRelation = (value: any): string | true => {
 
     if (!relations.includes(value)) {
         return 'مقدار نامعتبر است';
-    }
-
-    return true;
-};
-
-export const validateEmployee = (employee: EmployeeToAdd): boolean => {
-    const validations: { field: keyof EmployeeToAdd; message: string }[] = [
-        { field: 'firstName', message: 'فیلد نام ضروری است!' },
-        { field: 'lastName', message: 'فیلد نام خانوادگی ضروری است!' },
-        { field: 'dateOfBirth', message: 'فیلد تاریخ تولد ضروری است!' },
-    ];
-
-    for (const { field, message } of validations) {
-        if (!employee[field].length) {
-            toastAlert('error', message);
-
-            return false;
-        }
-    }
-
-    if (!validateEmail(employee.email)) {
-        toastAlert('error', 'ایمیل نا معتبر است!');
-
-        return false;
     }
 
     return true;

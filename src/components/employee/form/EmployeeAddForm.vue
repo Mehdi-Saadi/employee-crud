@@ -2,7 +2,6 @@
 import ButtonComponent from '@/components/buttons/ButtonComponent.vue';
 import EmployeeForm from '@/components/employee/form/EmployeeForm.vue';
 import useEmployeeStore from '@/stores/employee';
-import { validateEmployee } from '@/scripts/validation';
 import type { EmployeeToAdd } from '@/types/employee';
 import { ref, useTemplateRef } from 'vue';
 
@@ -20,11 +19,9 @@ const defaultEmployeeValue: EmployeeToAdd = {
 };
 
 const submit = async (employeeToAdd: EmployeeToAdd): Promise<void> => {
-    if (validateEmployee(employeeToAdd)) {
-        await addEmployee(employeeToAdd);
+    await addEmployee(employeeToAdd);
 
-        employeeFormRef.value?.resetForm();
-    }
+    employeeFormRef.value?.resetForm();
 };
 </script>
 
