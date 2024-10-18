@@ -23,8 +23,7 @@ export const validateEmail = (value: any): string | true => {
  * @param value
  * @returns string | true
  */
-export const validateString = (value: any): string | true =>
-    String(value).trim() ? true : 'این فیلد الزامی است';
+export const validateString = (value: any): string | true => (value ? true : 'این فیلد الزامی است');
 
 /**
  * Returns true on success, otherwise error message
