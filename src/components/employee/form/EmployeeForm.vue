@@ -3,16 +3,11 @@ import ButtonComponent from '@/components/buttons/ButtonComponent.vue';
 import FamilyForm from '@/components/employee/form/FamilyForm.vue';
 import FormField from '@/components/form/FormField.vue';
 import useEmployeeStore from '@/stores/employee';
+import { employeeValidationSchema } from '@/scripts/validation';
 import type { EmployeeToAdd } from '@/types/employee';
 import { FieldArray, Form } from 'vee-validate';
 import { cloneDeep } from 'lodash';
-import * as Yup from 'yup';
 import { ref } from 'vue';
-import {
-    thisFieldIsRequiredMsg,
-    thisFieldMustBeValidDateMsg,
-    thisFieldMustBeValidEmailMsg,
-} from '@/scripts/validation';
 
 const props = defineProps<{
     employee: EmployeeToAdd;
@@ -42,35 +37,13 @@ const submitForm = (values: any): void => {
 
     // emit('submit', values);
 };
-
-const schema = Yup.object({
-    firstName: Yup.string().required(thisFieldIsRequiredMsg),
-    lastName: Yup.string().required(thisFieldIsRequiredMsg),
-    dateOfBirth: Yup.date()
-        .typeError(thisFieldMustBeValidDateMsg)
-        .max(new Date(), thisFieldMustBeValidDateMsg)
-        .required(thisFieldIsRequiredMsg),
-    email: Yup.string().email(thisFieldMustBeValidEmailMsg).required(thisFieldIsRequiredMsg),
-    family: Yup.array().of(
-        Yup.object({
-            name: Yup.string().required(thisFieldIsRequiredMsg),
-            dateOfBirth: Yup.date()
-                .typeError(thisFieldMustBeValidDateMsg)
-                .max(new Date(), thisFieldMustBeValidDateMsg)
-                .required(thisFieldIsRequiredMsg),
-            relation: Yup.string()
-                .oneOf(['spouse', 'son', 'daughter'], thisFieldIsRequiredMsg)
-                .required(thisFieldIsRequiredMsg),
-        })
-    ),
-});
 </script>
 
 <template>
     <Form
         :class="{ border: formType === 'add' }"
         :initial-values="employee"
-        :validation-schema="schema"
+        :validation-schema="employeeValidationSchema"
         class="flex flex-col space-y-5 p-5 rounded mt-5"
         @submit="submitForm"
     >
