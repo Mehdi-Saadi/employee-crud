@@ -4,7 +4,7 @@ import FamilyForm from '@/components/employee/form/FamilyForm.vue';
 import FormField from '@/components/form/FormField.vue';
 import useEmployeeStore from '@/stores/employee';
 import type { EmployeeToAdd } from '@/types/employee';
-import { Form } from 'vee-validate';
+import { FieldArray, Form } from 'vee-validate';
 import { cloneDeep } from 'lodash';
 import * as Yup from 'yup';
 import { ref } from 'vue';
@@ -25,16 +25,10 @@ const getDefaultFormValues = (): EmployeeToAdd => cloneDeep(props.employee);
 
 const form = ref<EmployeeToAdd>(getDefaultFormValues());
 
-const addFamilyMember = (): void => {
-    form.value.family.push({
-        name: '',
-        dateOfBirth: '',
-        relation: 'spouse',
-    });
-};
-
-const deleteFamilyMember = (index: number): void => {
-    form.value.family.splice(index, 1);
+const initialFamilyMemberValue = {
+    name: '',
+    dateOfBirth: '',
+    relation: '',
 };
 
 const resetForm = (): void => {
@@ -53,6 +47,7 @@ const schema = Yup.object({
     firstName: Yup.string().required(thisFieldIsRequiredMsg),
     lastName: Yup.string().required(thisFieldIsRequiredMsg),
     dateOfBirth: Yup.date()
+        .typeError(thisFieldMustBeValidDateMsg)
         .max(new Date(), thisFieldMustBeValidDateMsg)
         .required(thisFieldIsRequiredMsg),
     email: Yup.string().email(thisFieldMustBeValidEmailMsg).required(thisFieldIsRequiredMsg),
@@ -60,10 +55,11 @@ const schema = Yup.object({
         Yup.object({
             name: Yup.string().required(thisFieldIsRequiredMsg),
             dateOfBirth: Yup.date()
+                .typeError(thisFieldMustBeValidDateMsg)
                 .max(new Date(), thisFieldMustBeValidDateMsg)
                 .required(thisFieldIsRequiredMsg),
             relation: Yup.string()
-                .oneOf(['spouse', 'son', 'daughter'])
+                .oneOf(['spouse', 'son', 'daughter'], thisFieldIsRequiredMsg)
                 .required(thisFieldIsRequiredMsg),
         })
     ),
@@ -103,17 +99,22 @@ const schema = Yup.object({
         </div>
         <!-- family members -->
         <div class="flex flex-col border rounded p-5 space-y-5">
-            <FamilyForm
-                v-for="(member, index) of form.family"
-                :index
-                :key="member.name"
-                @delete="deleteFamilyMember"
-            />
-            <ButtonComponent
-                @click="addFamilyMember()"
-                class="text-white bg-blue-500 hover:bg-blue-600"
-                title="افزودن عضو"
-            />
+            <FieldArray
+                name="family"
+                v-slot="{ fields, push, remove }"
+            >
+                <FamilyForm
+                    v-for="(member, index) of fields"
+                    :index
+                    :key="member.key"
+                    @delete="remove(index)"
+                />
+                <ButtonComponent
+                    @click="push(initialFamilyMemberValue)"
+                    class="text-white bg-blue-500 hover:bg-blue-600"
+                    title="افزودن عضو"
+                />
+            </FieldArray>
         </div>
         <!-- buttons -->
         <div
