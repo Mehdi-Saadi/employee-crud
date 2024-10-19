@@ -43,8 +43,7 @@ const {
             @blur="handleBlur"
         />
         <span
-            v-show="errorMessage"
-            class="text-xs text-red-700 mt-1 ps-3"
+            class="text-xs text-red-700 mt-1 ps-3 h-4"
         >
             {{ errorMessage }}
         </span>
