@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import DeleteButton from '@/components/buttons/DeleteButton.vue';
 import FormField from '@/components/form/FormField.vue';
-import { validateRelation, validateString } from '@/scripts/validation';
 import { Field, ErrorMessage } from 'vee-validate';
 
 defineProps<{
     index: number;
 }>();
 const emit = defineEmits(['delete']);
-
-const randomId = crypto.randomUUID();
 </script>
 
 <template>
@@ -18,32 +15,29 @@ const randomId = crypto.randomUUID();
             class="absolute start-5 top-0 flex items-center space-x-2 rtl:space-x-reverse bg-white px-2"
         >
             <span class="font-bold text-xl"> {{ index }} # </span>
-            <DeleteButton @click="emit('delete', index)" />
+            <DeleteButton @click="emit('delete')" />
         </div>
         <div class="grid grid-cols-2 gap-5 border rounded p-5">
             <FormField
-                :rules="validateString"
                 :name="`family[${index}].name`"
                 label="نام"
                 type="text"
             />
             <FormField
-                :rules="validateString"
                 :name="`family[${index}].dateOfBirth`"
                 label="تاریخ تولد"
                 type="date"
             />
             <div class="flex flex-col">
                 <label
-                    :for="randomId"
+                    :for="`family[${index}].relation`"
                     class="px-3"
                 >
                     نسبت
                 </label>
                 <Field
-                    :id="randomId"
+                    :id="`family[${index}].relation`"
                     :name="`family[${index}].relation`"
-                    :rules="validateRelation"
                     as="select"
                     class="border border-gray-300 focus:ring-0 focus:border-gray-400 rounded"
                 >
