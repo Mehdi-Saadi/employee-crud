@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import DeleteButton from '@/components/buttons/DeleteButton.vue';
 import FormField from '@/components/form/FormField.vue';
+import type { FamilyMember } from '@/types/employee';
 import { Field, ErrorMessage } from 'vee-validate';
 
 defineProps<{
+    member?: FamilyMember;
     index: number;
 }>();
 const emit = defineEmits(['delete']);
@@ -20,11 +22,15 @@ const emit = defineEmits(['delete']);
         <div class="grid grid-cols-2 gap-5 border rounded p-5">
             <FormField
                 :name="`family[${index}].name`"
+                :value="member?.name"
+                :key="index"
                 label="نام"
                 type="text"
             />
             <FormField
                 :name="`family[${index}].dateOfBirth`"
+                :value="member?.dateOfBirth"
+                :key="index"
                 label="تاریخ تولد"
                 type="date"
             />

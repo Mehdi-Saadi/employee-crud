@@ -78,8 +78,9 @@ const submitForm = (values: any): void => {
             >
                 <FamilyForm
                     v-for="(member, index) of fields"
-                    :index
                     :key="member.key"
+                    :member="member.value as any"
+                    :index
                     @delete="remove(index)"
                 />
                 <ButtonComponent
