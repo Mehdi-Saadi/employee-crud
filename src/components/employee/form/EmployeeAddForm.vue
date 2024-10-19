@@ -3,12 +3,10 @@ import ButtonComponent from '@/components/buttons/ButtonComponent.vue';
 import EmployeeForm from '@/components/employee/form/EmployeeForm.vue';
 import useEmployeeStore from '@/stores/employee';
 import type { EmployeeToAdd } from '@/types/employee';
-import { ref, useTemplateRef } from 'vue';
+import { ref } from 'vue';
 
 const { addEmployee } = useEmployeeStore();
 const showFrom = ref<boolean>(false);
-
-const employeeFormRef = useTemplateRef<InstanceType<typeof EmployeeForm>>('form-ref');
 
 const defaultEmployeeValue: EmployeeToAdd = {
     firstName: '',
@@ -18,10 +16,10 @@ const defaultEmployeeValue: EmployeeToAdd = {
     family: [],
 };
 
-const submit = async (employeeToAdd: EmployeeToAdd): Promise<void> => {
-    await addEmployee(employeeToAdd);
+const submit = async (options: { values: EmployeeToAdd, resetForm: any}): Promise<void> => {
+    await addEmployee(options.values);
 
-    employeeFormRef.value?.resetForm();
+    options.resetForm();
 };
 </script>
 
@@ -31,7 +29,6 @@ const submit = async (employeeToAdd: EmployeeToAdd): Promise<void> => {
         v-if="showFrom"
         :employee="defaultEmployeeValue"
         form-type="add"
-        ref="form-ref"
         @close="showFrom = false"
         @submit="submit"
     />

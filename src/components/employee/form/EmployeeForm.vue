@@ -6,19 +6,14 @@ import useEmployeeStore from '@/stores/employee';
 import { employeeValidationSchema } from '@/scripts/validation';
 import type { EmployeeToAdd } from '@/types/employee';
 import { FieldArray, Form } from 'vee-validate';
-import { cloneDeep } from 'lodash';
-import { ref } from 'vue';
 
-const props = defineProps<{
+defineProps<{
     employee: EmployeeToAdd;
     formType: 'add' | 'update';
 }>();
 const emit = defineEmits(['close', 'submit']);
 
 const employeeStore = useEmployeeStore();
-const getDefaultFormValues = (): EmployeeToAdd => cloneDeep(props.employee);
-
-const form = ref<EmployeeToAdd>(getDefaultFormValues());
 
 const initialFamilyMemberValue = {
     name: '',
@@ -26,16 +21,11 @@ const initialFamilyMemberValue = {
     relation: '',
 };
 
-const resetForm = (): void => {
-    form.value = getDefaultFormValues();
-};
-
-defineExpose({ resetForm });
-
-const submitForm = (values: any): void => {
-    console.log(values);
-
-    // emit('submit', values);
+const handleSubmit = (values: any, { resetForm }: { resetForm: any}) => {
+    emit('submit', {
+        values,
+        resetForm,
+    });
 };
 </script>
 
@@ -45,7 +35,7 @@ const submitForm = (values: any): void => {
         :initial-values="employee"
         :validation-schema="employeeValidationSchema"
         class="flex flex-col space-y-5 p-5 rounded mt-5"
-        @submit="submitForm"
+        @submit="handleSubmit"
     >
         <!-- employee data -->
         <div class="grid grid-cols-2 gap-5">
