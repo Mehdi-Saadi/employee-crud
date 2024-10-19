@@ -8,6 +8,11 @@ import { Form } from 'vee-validate';
 import { cloneDeep } from 'lodash';
 import * as Yup from 'yup';
 import { ref } from 'vue';
+import {
+    thisFieldIsRequiredMsg,
+    thisFieldMustBeValidDateMsg,
+    thisFieldMustBeValidEmailMsg,
+} from '@/scripts/validation';
 
 const props = defineProps<{
     employee: EmployeeToAdd;
@@ -45,10 +50,23 @@ const submitForm = (values: any): void => {
 };
 
 const schema = Yup.object({
-    firstName: Yup.string().required(),
-    lastName: Yup.string().required(),
-    dateOfBirth: Yup.date().required(),
-    email: Yup.string().email().required(),
+    firstName: Yup.string().required(thisFieldIsRequiredMsg),
+    lastName: Yup.string().required(thisFieldIsRequiredMsg),
+    dateOfBirth: Yup.date()
+        .max(new Date(), thisFieldMustBeValidDateMsg)
+        .required(thisFieldIsRequiredMsg),
+    email: Yup.string().email(thisFieldMustBeValidEmailMsg).required(thisFieldIsRequiredMsg),
+    family: Yup.array().of(
+        Yup.object({
+            name: Yup.string().required(thisFieldIsRequiredMsg),
+            dateOfBirth: Yup.date()
+                .max(new Date(), thisFieldMustBeValidDateMsg)
+                .required(thisFieldIsRequiredMsg),
+            relation: Yup.string()
+                .oneOf(['spouse', 'son', 'daughter'])
+                .required(thisFieldIsRequiredMsg),
+        })
+    ),
 });
 </script>
 
