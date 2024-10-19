@@ -3,10 +3,10 @@ import ButtonComponent from '@/components/buttons/ButtonComponent.vue';
 import FamilyForm from '@/components/employee/form/FamilyForm.vue';
 import FormField from '@/components/form/FormField.vue';
 import useEmployeeStore from '@/stores/employee';
-import { validateEmail, validateString } from '@/scripts/validation';
 import type { EmployeeToAdd } from '@/types/employee';
 import { Form } from 'vee-validate';
 import { cloneDeep } from 'lodash';
+import * as Yup from 'yup';
 import { ref } from 'vue';
 
 const props = defineProps<{
@@ -43,37 +43,41 @@ const submitForm = (values: any): void => {
 
     // emit('submit', values);
 };
+
+const schema = Yup.object({
+    firstName: Yup.string().required(),
+    lastName: Yup.string().required(),
+    dateOfBirth: Yup.date().required(),
+    email: Yup.string().email().required(),
+});
 </script>
 
 <template>
     <Form
         :class="{ border: formType === 'add' }"
         :initial-values="employee"
+        :validation-schema="schema"
         class="flex flex-col space-y-5 p-5 rounded mt-5"
         @submit="submitForm"
     >
         <!-- employee data -->
         <div class="grid grid-cols-2 gap-5">
             <FormField
-                :rules="validateString"
                 name="firstName"
                 label="نام"
                 type="text"
             />
             <FormField
-                :rules="validateString"
                 name="lastName"
                 label="نام خانوادگی"
                 type="text"
             />
             <FormField
-                :rules="validateString"
                 name="dateOfBirth"
                 label="تاریخ تولد"
                 type="date"
             />
             <FormField
-                :rules="validateEmail"
                 name="email"
                 label="ایمیل"
                 type="email"
