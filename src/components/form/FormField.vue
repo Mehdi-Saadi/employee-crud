@@ -42,9 +42,7 @@ const {
             @input="handleChange"
             @blur="handleBlur"
         />
-        <span
-            class="text-xs text-red-700 mt-1 ps-3 h-4"
-        >
+        <span class="text-xs text-red-700 mt-1 ps-3 h-4">
             {{ errorMessage }}
         </span>
     </div>
