@@ -1,42 +1,52 @@
 <script setup lang="ts">
-import { Field, ErrorMessage, useForm } from 'vee-validate';
 import { type InputTypeHTMLAttribute } from 'vue';
+import { useField } from 'vee-validate';
 
-defineProps<{
+const props = defineProps<{
     name: string;
     label: string;
     type: InputTypeHTMLAttribute;
-    rules?: any;
+    value?: string;
 }>();
 
-const randomId = crypto.randomUUID();
-const { errors } = useForm();
+const {
+    value: inputValue,
+    errorMessage,
+    handleBlur,
+    handleChange,
+} = useField(props.name, undefined, {
+    initialValue: props.value,
+});
 </script>
 
 <template>
     <div class="flex flex-col">
         <label
-            :for="randomId"
+            :for="name"
             class="px-3"
         >
             {{ label }}
         </label>
-        <Field
-            :id="randomId"
-            :name
-            :rules
-            :type
+        <input
             :class="
-                errors[name]
+                errorMessage
                     ? 'border-red-700 focus:border-red-700'
                     : 'border-gray-300 focus:border-gray-400'
             "
-            class="border focus:ring-0 rounded"
-            :validate-on-input="true"
-        />
-        <ErrorMessage
+            :id="name"
             :name
-            class="text-xs text-red-700 mt-1 ps-3"
+            :type
+            :validate-on-input="true"
+            :value="inputValue"
+            class="border focus:ring-0 rounded"
+            @input="handleChange"
+            @blur="handleBlur"
         />
+        <span
+            v-show="errorMessage"
+            class="text-xs text-red-700 mt-1 ps-3"
+        >
+            {{ errorMessage }}
+        </span>
     </div>
 </template>
