@@ -12,7 +12,7 @@ const props = defineProps<{
 const { updateEmployee } = useEmployeeStore();
 const { id, ...defaultEmployeeValue } = cloneDeep(props.employee);
 
-const submit = async (options: { values: EmployeeToAdd, resetForm: any}): Promise<void> => {
+const submit = async (options: { values: EmployeeToAdd; resetForm: any }): Promise<void> => {
     await updateEmployee({
         id: id,
         ...cloneDeep(options.values),

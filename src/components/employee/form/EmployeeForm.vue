@@ -21,7 +21,7 @@ const initialFamilyMemberValue = {
     relation: '',
 };
 
-const handleSubmit = (values: any, { resetForm }: { resetForm: any}) => {
+const handleSubmit = (values: any, { resetForm }: { resetForm: any }) => {
     emit('submit', {
         values,
         resetForm,

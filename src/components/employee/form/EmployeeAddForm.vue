@@ -16,7 +16,7 @@ const defaultEmployeeValue: EmployeeToAdd = {
     family: [],
 };
 
-const submit = async (options: { values: EmployeeToAdd, resetForm: any}): Promise<void> => {
+const submit = async (options: { values: EmployeeToAdd; resetForm: any }): Promise<void> => {
     await addEmployee(options.values);
 
     options.resetForm();
