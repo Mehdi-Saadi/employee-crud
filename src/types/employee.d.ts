@@ -1,21 +1,15 @@
-type DateOfBirth = string; // date-time
+import {
+    relationValidationSchema,
+    familyMemberValidationSchema,
+    employeeValidationSchema,
+} from 'src/scripts/validation.ts';
+import type { InferType } from 'yup';
 
-export interface Employee {
-    id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    dateOfBirth: DateOfBirth;
-    family: FamilyMember[];
-}
+export type Employee = InferType<typeof employeeValidationSchema> & { id: string };
 
-export type FamilyRelation = 'spouse' | 'daughter' | 'son';
+export type FamilyRelation = InferType<typeof relationValidationSchema>;
 
-export interface FamilyMember {
-    name: string;
-    dateOfBirth: DateOfBirth;
-    relation: FamilyRelation;
-}
+export type FamilyMember = InferType<typeof familyMemberValidationSchema>;
 
 export type EmployeeBrief = Pick<Employee, 'id' | 'firstName' | 'lastName'>;
 
